@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {}, ... }:
 pkgs.stdenv.mkDerivation {
   name = "fswatch";
-  src = ./fswatch;
+  src = ./.;
   nativeBuildInputs = [ pkgs.makeWrapper ];
   installPhase = ''
     install -D -m755 fswatch.sh $out/bin/fswatch

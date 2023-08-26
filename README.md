@@ -1,7 +1,7 @@
 ## Usage with nix-env
 
 ```
-$ nix-env -i -f ./nvim.nix
+$ nix-env -i -f ./nvim
 ```
 
 ## Usage with nix-shell
@@ -10,7 +10,7 @@ $ nix-env -i -f ./nvim.nix
 $ nix-shell --expr '
   { pkgs ? import <nixpkgs> {} }:
   pkgs.mkShell {
-      nativeBuildInputs = [ (import (./nvim.nix) {}) ];   
+      nativeBuildInputs = [ (import (./nvim) {}) ];   
   }
 '
 ```
@@ -28,7 +28,7 @@ let
       rev = "beb600429f929019e8a411d673e3c6c3fb33171d";
       sha256 = "sha256-zdlmrY493lX5T7hQonMKTL5X5+uA/7holkmkSqX0wNQ=";
     };
-  neovim = import (derivations + "/nvim.nix") {};
+  neovim = import (derivations + "/nvim") {};
 in {
   environment.systemPackages = [ neovim ];
 }

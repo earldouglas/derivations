@@ -3,10 +3,10 @@
 let
 
   nvim-metals_vim =
-    builtins.readFile(./nvim/nvim-metals.vim);
+    builtins.readFile(./nvim-metals.vim);
 
   nerdtree_vim =
-    builtins.readFile(./nvim/nerdtree.vim);
+    builtins.readFile(./nerdtree.vim);
 
   vimrc = ''
     if filereadable(expand('~/.vimrc'))
