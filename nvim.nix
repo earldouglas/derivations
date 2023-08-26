@@ -11,6 +11,21 @@
 #   }
 # '
 #
+# Usage with NixOS:
+# let
+#   derivations =
+#     pkgs.fetchFromGitHub {
+#       owner = "earldouglas";
+#       repo = "derivations";
+#       rev = "beb600429f929019e8a411d673e3c6c3fb33171d";
+#       sha256 = "sha256-zdlmrY493lX5T7hQonMKTL5X5+uA/7holkmkSqX0wNQ=";
+#     };
+#   neovim = import (derivations + "/nvim.nix") {};
+# in {
+#   environment.systemPackages = [ neovim ];
+# }
+#
+#
 ########################################################################
 
 { pkgs ? import <nixpkgs> {}, ... }:
