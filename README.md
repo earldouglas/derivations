@@ -7,12 +7,7 @@ $ nix-env -i -f ./nvim
 ## Usage with nix-shell
 
 ```
-$ nix-shell --expr '
-  { pkgs ? import <nixpkgs> {} }:
-  pkgs.mkShell {
-      nativeBuildInputs = [ (import (./nvim) {}) ];   
-  }
-'
+$ nix-shell ./nvim/shell.nix
 ```
 
 ## Usage with NixOS
