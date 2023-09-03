@@ -14,33 +14,39 @@ let
     endif
   '';
 
+  nvim_with_plugins =
+    pkgs.neovim.override {
+      configure = {
+        customRC = nvim-metals_vim + nerdtree_vim + vimrc;
+        packages.myVimPackage =
+          with pkgs.vimPlugins; {
+            start = [
+              plenary-nvim     # required by nvim-metals
+              nvim-dap         # required by nvim-metals?
+              nvim-cmp
+              cmp-nvim-lsp
+              nvim-metals
+              vim-airline
+              vim-nix
+              vim-scala
+              nerdtree
+            ];
+          };
+      };
+    };
+
 in 
 
-  (
-    pkgs.neovim.overrideAttrs (finalAttrs: previousAttrs: {
-      postFixup =
-        (previousAttrs.postFixup or "") + ''
-        wrapProgram $out/bin/nvim \
-          --prefix PATH:${pkgs.lib.makeBinPath [ pkgs.coursier ]} \
-          --prefix PATH:${pkgs.lib.makeBinPath [ pkgs.metals ]}
-      '';
-    })
-  ).override {
-    configure = {
-      customRC = nvim-metals_vim + nerdtree_vim + vimrc;
-      packages.myVimPackage =
-        with pkgs.vimPlugins; {
-          start = [
-            plenary-nvim     # required by nvim-metals
-            nvim-dap         # required by nvim-metals?
-            nvim-cmp
-            cmp-nvim-lsp
-            nvim-metals
-            vim-airline
-            vim-nix
-            vim-scala
-            nerdtree
-          ];
-        };
-    };
+  pkgs.runCommand "nvim" {
+    buildInputs = [ pkgs.makeWrapper ];
   }
+  ''
+    mkdir -p $out/bin
+    makeWrapper ${nvim_with_plugins}/bin/nvim $out/bin/nvim \
+      --set PATH ${pkgs.lib.makeBinPath [
+        pkgs.coursier
+        pkgs.metals
+        pkgs.bash
+        pkgs.jdk17
+      ]}
+  ''
