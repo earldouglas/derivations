@@ -17,7 +17,6 @@ let
       vimrcConfig = {
         customRC =
           builtins.concatStringsSep "\n" [
-            (builtins.readFile ./vim/vimrc.vim)
             ''
               filetype indent on
               filetype plugin on
