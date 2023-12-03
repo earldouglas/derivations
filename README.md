@@ -16,15 +16,24 @@ $ nix-shell ./nvim/shell.nix
 
 ```nix
 let
+
   derivations =
     pkgs.fetchFromGitHub {
       owner = "earldouglas";
       repo = "derivations";
-      rev = "beb600429f929019e8a411d673e3c6c3fb33171d";
-      sha256 = "sha256-zdlmrY493lX5T7hQonMKTL5X5+uA/7holkmkSqX0wNQ=";
+      rev = "816ff78c3da0f90b07eafd174a386c8f885cf14a";
+      sha256 = "13sy7axxj6517iqkidq3s132adk4s217mm7i7ni92fh7p89scd2a";
     };
-  neovim = import (derivations + "/nvim") {};
+
+  vim-unison = import (derivations + "/vim/unison/default.nix") {};
+  unison-nix = import (derivations + "/vim/unison/unison.nix") {};
+
 in {
-  environment.systemPackages = [ neovim ];
+
+  environment.systemPackages = [
+    vim-unison
+    unison-nix.unison-ucm
+  ];
+
 }
 ```
