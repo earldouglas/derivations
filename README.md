@@ -1,16 +1,19 @@
-## Usage with nix-env
+# Usage
+
+## nix-env
 
 ```
-$ nix-env -i -f ./nvim
+$ nix-env -i -f ./vim/unison/default.nix
+$ nix-env -i -f ./vim/unison/unison.nix
 ```
 
-## Usage with nix-shell
+## nix-shell
 
 ```
-$ nix-shell ./nvim/shell.nix
+$ nix-shell ./vim/unison/shell.nix
 ```
 
-## Usage with NixOS
+## NixOS
 
 *configuration.nix:*
 
