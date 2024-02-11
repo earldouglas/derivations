@@ -6,14 +6,10 @@
   programs.light.enable = true;
   programs.steam.enable = true;
   time.timeZone = timeZone;
-  boot = {
-    supportedFilesystems = [
-      "ntfs"
-    ];
-    kernelModules = [
-      "i2c-dev" # enables ddcutil for monitor brightness
-    ];
-  };
+  boot.supportedFilesystems = [ "ntfs" ];
+  boot.kernelModules = [
+    "i2c-dev" # enables ddcutil for monitor brightness
+  ];
 
   # GC #################################################################
   nix.gc = {
@@ -76,32 +72,30 @@
   ];
 
   # Services ###########################################################
-  services = {
-    cron.enable = true;
-    fail2ban.enable = true;
-    gpm.enable = true;
-    openssh.enable = false;
-    udisks2.enable = true;
+  services.cron.enable = true;
+  services.fail2ban.enable = true;
+  services.gpm.enable = true;
+  services.openssh.enable = false;
+  services.udisks2.enable = true;
 
-    # X11 ##############################################################
-    xserver = {
-      enable = true;
-      xkb.layout = "us";
-      windowManager.xmonad.enable = true;
-      windowManager.xmonad.enableContribAndExtras = true;
-      displayManager.defaultSession = "none+xmonad";
-      desktopManager.xterm.enable = false;
-      synaptics.enable = false;
-    };
+  # X11 ##############################################################
+  services.xserver = {
+    enable = true;
+    xkb.layout = "us";
+    windowManager.xmonad.enable = true;
+    windowManager.xmonad.enableContribAndExtras = true;
+    displayManager.defaultSession = "none+xmonad";
+    desktopManager.xterm.enable = false;
+    synaptics.enable = false;
+  };
 
-    # Printing #########################################################
-    printing = {
-      enable = true;
-      drivers = [
-        pkgs.brgenml1cupswrapper
-        pkgs.brgenml1lpr
-      ];
-    };
+  # Printing #########################################################
+  services.printing = {
+    enable = true;
+    drivers = [
+      pkgs.brgenml1cupswrapper
+      pkgs.brgenml1lpr
+    ];
   };
 
   # Fonts ##############################################################

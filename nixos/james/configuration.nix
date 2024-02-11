@@ -65,32 +65,22 @@ in {
 
   # Users ##############################################################
 
-  users.users = {
-
-    root = {
-      openssh.authorizedKeys.keys = [
-        builtins.readFile ./id_rsa.pub
-      ];
-    };
-
-    james = {
-      isNormalUser = true;
-      home = "/home/james";
-      extraGroups = [
-        "adbusers"
-        "dialout" # /dev/ttyUSB0 for Baofeng, C.H.I.P.
-        "docker"
-        "lp" # printer?
-        "plugdev" # rtl-sdr
-        "vboxusers" # virtualbox
-        "video" # light
-        "wheel" # sudo
-      ];
-      openssh.authorizedKeys.keys = [
-        builtins.readFile ./id_rsa.pub
-      ];
-    };
-
+  users.users.james = {
+    isNormalUser = true;
+    home = "/home/james";
+    extraGroups = [
+      "adbusers"
+      "dialout" # /dev/ttyUSB0 for Baofeng, C.H.I.P.
+      "docker"
+      "lp" # printer?
+      "plugdev" # rtl-sdr
+      "vboxusers" # virtualbox
+      "video" # light
+      "wheel" # sudo
+    ];
+    openssh.authorizedKeys.keys = [
+      builtins.readFile ./id_rsa.pub
+    ];
   };
 
   # Home Manager #######################################################
@@ -178,39 +168,37 @@ in {
         xmobar-wifi
       ];
     };
-    programs = {
-      bash = {
-        enable = true;
-        bashrcExtra = builtins.readFile ./bash_aliases;
-      };
-      xmobar = {
-        enable = true;
-        extraConfig = builtins.readFile ./xmobarrc;
-      };
-      git = {
-        enable = true;
-        userName  = "James Earl Douglas";
-        userEmail = "james@earldouglas.com";
-        ignores = [
-          ".bloop/"
-          ".metals/"
-          "project/.bloop/"
-          "project/metals.sbt"
-          "project/project/"
-        ];
-      };
-      ssh = {
-        enable = true;
-        addKeysToAgent = "yes";
-      };
-      vim = {
-        enable = true;
-        defaultEditor = true;
-        packageConfigurable = pkgs.vimHugeX;
-        extraConfig = builtins.readFile ./vimrc;
-      };
-      gpg.enable = true;
+    programs.bash = {
+      enable = true;
+      bashrcExtra = builtins.readFile ./bash_aliases;
     };
+    programs.xmobar = {
+      enable = true;
+      extraConfig = builtins.readFile ./xmobarrc;
+    };
+    programs.git = {
+      enable = true;
+      userName  = "James Earl Douglas";
+      userEmail = "james@earldouglas.com";
+      ignores = [
+        ".bloop/"
+        ".metals/"
+        "project/.bloop/"
+        "project/metals.sbt"
+        "project/project/"
+      ];
+    };
+    programs.ssh = {
+      enable = true;
+      addKeysToAgent = "yes";
+    };
+    programs.vim = {
+      enable = true;
+      defaultEditor = true;
+      packageConfigurable = pkgs.vimHugeX;
+      extraConfig = builtins.readFile ./vimrc;
+    };
+    programs.gpg.enable = true;
     xresources.extraConfig = builtins.readFile ./xresources;
     xsession = {
       enable = true;
@@ -221,16 +209,14 @@ in {
         config = ./xmonad.hs;
       };
     };
-    services = {
-      ssh-agent.enable = true;
-      gpg-agent = {
-        enable = true;
-        extraConfig = ''
-          default-cache-ttl 86400
-          pinentry-program ${pkgs.pinentry-qt}/bin/pinentry-qt
-          allow-loopback-pinentry
-        '';
-      };
+    services.ssh-agent.enable = true;
+    services.gpg-agent = {
+      enable = true;
+      extraConfig = ''
+        default-cache-ttl 86400
+        pinentry-program ${pkgs.pinentry-qt}/bin/pinentry-qt
+        allow-loopback-pinentry
+      '';
     };
   };
 }
