@@ -1,0 +1,119 @@
+{ hostName, domain, timeZone, pkgs, ... }:
+{
+
+  i18n.supportedLocales = [ "all" ];
+  powerManagement.powertop.enable = true;
+  programs.light.enable = true;
+  programs.steam.enable = true;
+  time.timeZone = timeZone;
+  boot = {
+    supportedFilesystems = [
+      "ntfs"
+    ];
+    kernelModules = [
+      "i2c-dev" # enables ddcutil for monitor brightness
+    ];
+  };
+
+  # GC #################################################################
+  nix.gc = {
+    automatic = true;
+    options = "-d";
+  };
+  nix.optimise.automatic = true;
+
+  # Audio ############################################################
+  sound.enable = false; # disable ALSA-based configuration
+  security.rtkit.enable = true; # for PulseAudio to acquire realtime priority
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
+
+  # Bluetooth ########################################################
+  hardware.bluetooth.enable = false;
+
+  # Networking #########################################################
+  networking = {
+    hostName = hostName;
+    domain = domain;
+    wireless.enable = true;
+    firewall.enable = true;
+  };
+
+  # Packages ###########################################################
+  nixpkgs.config.allowUnfree = true;
+  environment.systemPackages = [
+    pkgs.pavucontrol
+    pkgs.nvi
+    pkgs.vimHugeX
+  ];
+
+  # Sudoers ############################################################
+  security.sudo.extraRules = [
+    {
+      groups = [ "wheel" ];
+      commands =
+        map
+          (x:
+            {
+              command = "/run/current-system/sw/bin/${x}";
+              options = [ "SETENV" "NOPASSWD" ];
+            }
+          )
+          [
+            "nix-channel"
+            "nix-collect-garbage"
+            "nixos-rebuild"
+            "reboot"
+            "shutdown"
+            "systemctl"
+          ];
+    }
+  ];
+
+  # Services ###########################################################
+  services = {
+    cron.enable = true;
+    fail2ban.enable = true;
+    gpm.enable = true;
+    openssh.enable = false;
+    udisks2.enable = true;
+
+    # X11 ##############################################################
+    xserver = {
+      enable = true;
+      xkb.layout = "us";
+      windowManager.xmonad.enable = true;
+      windowManager.xmonad.enableContribAndExtras = true;
+      displayManager.defaultSession = "none+xmonad";
+      desktopManager.xterm.enable = false;
+      synaptics.enable = false;
+    };
+
+    # Printing #########################################################
+    printing = {
+      enable = true;
+      drivers = [
+        pkgs.brgenml1cupswrapper
+        pkgs.brgenml1lpr
+      ];
+    };
+  };
+
+  # Fonts ##############################################################
+  fonts = {
+    packages = [
+      pkgs.corefonts # non-free
+      pkgs.dejavu_fonts
+      pkgs.ubuntu_font_family
+    ];
+  };
+
+  ## Docker ############################################################
+  virtualisation.docker.enable = true;
+
+}
