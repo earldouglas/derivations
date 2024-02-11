@@ -1,0 +1,15 @@
+!! Font
+XTerm*faceName: Ubuntu Mono
+XTerm*faceSize: 12
+
+!! Dark mode
+XTerm*reverseVideo: on
+
+!! Make dark blue easier on the eyes
+XTerm*color12: CornflowerBlue
+
+!! Triple-click to highlight URL
+XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
+
+!! Shift-click to open highlighted URL
+XTerm*translations: #override Shift <Btn1Up>: exec-formatted("/run/current-system/sw/bin/xdg-open '%t'", PRIMARY)

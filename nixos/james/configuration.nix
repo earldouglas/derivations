@@ -1,0 +1,236 @@
+{ shareUser, sharePass, stateVersion, pkgs, ... }:
+let
+
+  derivations =
+    pkgs.fetchFromGitHub {
+      owner = "earldouglas";
+      repo = "derivations";
+      rev = "816ff78c3da0f90b07eafd174a386c8f885cf14a";
+      sha256 = "13sy7axxj6517iqkidq3s132adk4s217mm7i7ni92fh7p89scd2a";
+    };
+
+  nvim-haskell = import (derivations + "/nvim/haskell/default.nix") {};
+  nvim-java = import (derivations + "/nvim/java/default.nix") {};
+  nvim-scala = import (derivations + "/nvim/scala/default.nix") {};
+  vim-ocaml = import (derivations + "/vim/ocaml/default.nix") {};
+  vim-unison = import (derivations + "/vim/unison/default.nix") {};
+
+  unison-nix = import (derivations + "/vim/unison/unison.nix") {};
+
+  fswatch = import (derivations + "/fswatch/default.nix") {};
+  record = import (derivations + "/record/default.nix") {};
+
+  twofamenu =
+    pkgs.writeShellApplication {
+      name = "2famenu";
+      runtimeInputs = [];
+      text = builtins.readFile ./scripts/2famenu.sh;
+    };
+
+  xmobar-vol =
+    pkgs.writeShellApplication {
+      name = "xmobar-vol";
+      runtimeInputs = [
+        pkgs.alsa-utils # amixer
+      ];
+      text = builtins.readFile ./scripts/xmobar-vol.sh;
+    };
+
+  xmobar-wifi =
+    pkgs.writeShellApplication {
+      name = "xmobar-wifi";
+      runtimeInputs = [];
+      text = builtins.readFile ./scripts/xmobar-wifi.sh;
+    };
+
+in {
+
+  imports = [
+    <home-manager/nixos> # https://github.com/nix-community/home-manager/archive/master.tar.gz
+  ];
+
+  # Samba ##############################################################
+
+  fileSystems."/home/james/share" = {
+    device = "//servo/share";
+    fsType = "cifs";
+    options =
+      let
+        # prevent hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      in [
+        "${automount_opts},uid=1000,gid=100,forceuid,forcegid,username=${shareUser},password=${sharePass},dir_mode=0775,file_mode=0664"
+      ];
+  };
+
+  # Users ##############################################################
+
+  users.users = {
+
+    root = {
+      openssh.authorizedKeys.keys = [
+        builtins.readFile ./id_rsa.pub
+      ];
+    };
+
+    james = {
+      isNormalUser = true;
+      home = "/home/james";
+      extraGroups = [
+        "adbusers"
+        "dialout" # /dev/ttyUSB0 for Baofeng, C.H.I.P.
+        "docker"
+        "lp" # printer?
+        "plugdev" # rtl-sdr
+        "vboxusers" # virtualbox
+        "video" # light
+        "wheel" # sudo
+      ];
+      openssh.authorizedKeys.keys = [
+        builtins.readFile ./id_rsa.pub
+      ];
+    };
+
+  };
+
+  # Home Manager #######################################################
+
+  home-manager.users.james = {
+    home = {
+      stateVersion = stateVersion;
+      packages = [
+
+        pkgs.arandr
+        pkgs.bind # nslookup
+        pkgs.binutils
+        pkgs.calibre
+        pkgs.cloc
+        pkgs.curl
+        pkgs.direwolf
+        pkgs.dmenu
+        pkgs.electrum
+        pkgs.file
+        pkgs.firefox
+        pkgs.flameshot
+        pkgs.geeqie
+        pkgs.gimp
+        pkgs.git
+        pkgs.gnupg
+        pkgs.haskellPackages.ghc
+        pkgs.heroic
+        pkgs.htop
+        pkgs.imagemagick
+        pkgs.inetutils # telnet
+        pkgs.inotify-tools
+        pkgs.jdk
+        pkgs.jq
+        pkgs.killall
+        pkgs.libreoffice
+        pkgs.links2
+        pkgs.lm_sensors
+        pkgs.mosh
+        pkgs.musescore
+        pkgs.nix-prefetch-git
+        pkgs.nmap
+        pkgs.nodejs
+        pkgs.oathToolkit
+        pkgs.pass
+        pkgs.pavucontrol
+        pkgs.powertop
+        pkgs.rename
+        pkgs.rtl-sdr
+        pkgs.sbt
+        pkgs.scala
+        pkgs.scala-cli
+        pkgs.scrcpy
+        pkgs.screen
+        pkgs.scrot
+        pkgs.stellarium
+        pkgs.tree
+        pkgs.unrar
+        pkgs.unzip
+        pkgs.uqm
+        pkgs.wget
+        pkgs.which
+        pkgs.wpa_supplicant_gui
+        pkgs.xclip
+        pkgs.xmobar
+        pkgs.xorg.libXrandr
+        pkgs.xorg.xbacklight
+        pkgs.xorg.xhost
+        pkgs.xorg.xinit
+        pkgs.xorg.xkill
+        pkgs.xournal # edit (sign, fill out, etc.) PDFs
+        pkgs.zip
+
+        unison-nix.unison-ucm
+
+        nvim-haskell
+        nvim-java
+        nvim-scala
+        vim-ocaml
+        vim-unison
+
+        fswatch
+        record
+        twofamenu
+        xmobar-vol
+        xmobar-wifi
+      ];
+    };
+    programs = {
+      bash = {
+        enable = true;
+        bashrcExtra = builtins.readFile ./bash_aliases;
+      };
+      xmobar = {
+        enable = true;
+        extraConfig = builtins.readFile ./xmobarrc;
+      };
+      git = {
+        enable = true;
+        userName  = "James Earl Douglas";
+        userEmail = "james@earldouglas.com";
+        ignores = [
+          ".bloop/"
+          ".metals/"
+          "project/.bloop/"
+          "project/metals.sbt"
+          "project/project/"
+        ];
+      };
+      ssh = {
+        enable = true;
+        addKeysToAgent = "yes";
+      };
+      vim = {
+        enable = true;
+        defaultEditor = true;
+        packageConfigurable = pkgs.vimHugeX;
+        extraConfig = builtins.readFile ./vimrc;
+      };
+      gpg.enable = true;
+    };
+    xresources.extraConfig = builtins.readFile ./xresources;
+    xsession = {
+      enable = true;
+      profileExtra = builtins.readFile ./xprofile;
+      windowManager.xmonad = {
+        enable = true;
+        enableContribAndExtras = true;
+        config = ./xmonad.hs;
+      };
+    };
+    services = {
+      ssh-agent.enable = true;
+      gpg-agent = {
+        enable = true;
+        extraConfig = ''
+          default-cache-ttl 86400
+          pinentry-program ${pkgs.pinentry-qt}/bin/pinentry-qt
+          allow-loopback-pinentry
+        '';
+      };
+    };
+  };
+}

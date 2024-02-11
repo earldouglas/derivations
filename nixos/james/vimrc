@@ -1,0 +1,52 @@
+syntax on
+
+set autoindent
+set clipboard=unnamedplus
+set noswapfile
+set ruler
+set number
+
+set backspace=indent,eol,start
+
+set textwidth=72
+set colorcolumn=73
+
+set termguicolors
+
+if !has('nvim')
+  set ttymouse=
+endif
+set mouse=
+
+autocmd BufRead,BufNewFile *.{txt} set filetype=markdown
+
+set expandtab
+set shiftwidth=2
+
+set background=dark
+
+set spell
+highlight SpellBad ctermbg=black cterm=underline
+
+" Map ctrl+c to convert Markdown to HTML and copy it into the clipboard
+map <leader>c :w !pandoc -f markdown -t html \| xclip -i -sel clipboard -t text/html<CR><CR>
+map <leader>v :r !xclip -o -sel clipboard -t text/html \| pandoc -f html -t markdown_strict<CR><CR>
+
+" Format the selected code with scalafmt
+" map <leader>f !scalafmt --stdin --config ~/docs/dotfiles/scalafmt.conf<CR><CR>
+
+let g:markdown_fenced_languages = ['scala', 'html', 'python', 'bash=sh']
+
+set ignorecase " case-insensitive searching
+set smartcase " case-insensitive iff query is lowercase
+
+" Fix list wrapping
+" https://github.com/preservim/vim-markdown/issues/390#issuecomment-450392655
+let g:vim_markdown_auto_insert_bullets=0
+let g:vim_markdown_new_list_item_indent=0
+autocmd FileType markdown setlocal formatlistpat=^\\s*\\d\\+[.\)]\\s\\+\\\|^\\s*[*+~-]\\s\\+\\\|^\\(\\\|[*#]\\)\\[^[^\\]]\\+\\]:\\s | setlocal comments=n:> | setlocal formatoptions+=cn
+"" don't add bullets to the new line of a wrapped list item
+"autocmd FileType markdown set comments=fb:*,fb:-,fb:+,n:>
+
+" autocmd BufWritePre *.scala lua vim.lsp.buf.format()
+" autocmd BufWritePre *.sbt lua vim.lsp.buf.format()

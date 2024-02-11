@@ -1,0 +1,14 @@
+# disable bell
+xset b off
+
+# screen locker
+xss-lock -- i3lock --color=112244 &
+
+# screen timeout
+# ${pkgs.xorg.xset}/bin/xset dpms 900 900 900
+
+# desktop background
+xsetroot -solid black
+
+# disable touchpad
+xinput list | grep -Eoi 'touchpad\s*id=[0-9]{1,2}' | grep -Eo '[0-9]{1,2}' | xargs xinput disable

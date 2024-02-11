@@ -1,0 +1,44 @@
+Config
+  { font = "xft:Ubuntu Mono Bold 12"
+  -- , bgColor = "#112244"
+  , fgColor = "#ffffff"
+  , position = BottomH 24
+  , commands =
+      [ Run StdinReader
+      , Run Com "xmobar-vol" [] "vol" 10
+      , Run Com "xmobar-wifi" [] "wifi" 10
+      , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+      , Run Cpu [ "-L", "3"
+                , "-H", "50"
+                , "--low", "lightblue"
+                , "--normal", "green"
+                , "--high", "red"
+                ] 10
+      , Run Memory [ "--template", "Mem: <usedratio>%"
+                   , "--Low", "25"
+                   , "--High", "50"
+                   , "--low", "green"
+                   , "--normal", "orange"
+                   , "--high", "red"
+                   ] 10
+      , Run Battery [ "--template", "Batt: <acstatus>"
+                    , "--Low", "40"
+                    , "--High", "80"
+                    , "--low", "red"
+                    , "--normal", "orange"
+                    , "--high", "green"
+                    , "--" -- battery-specific options
+                    , "-o", "<left>% (<timeleft>)" -- discharging
+                    , "-O", "<fc=#dAA520>Charging</fc>: <left>% (<timeleft>)" -- AC on
+                    , "-i", "<fc=#6699ff>Full</fc>" -- charged
+                    ] 50
+      , Run DynNetwork [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
+                       ,  "--Low"      , "1000"       -- units: B/s
+                       ,  "--High"     , "5000"       -- units: B/s
+                       ,  "--low"      , "darkgreen"
+                       ,  "--normal"   , "darkorange"
+                       ,  "--high"     , "darkred"
+                       ] 10
+      ]
+  , template = "%StdinReader% }{ %dynnetwork% | %cpu% | %memory% | %battery% | WiFi: %wifi% | %vol% | <fc=#ffffff>%date%</fc>"
+  }

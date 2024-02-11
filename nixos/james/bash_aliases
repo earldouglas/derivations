@@ -1,0 +1,20 @@
+export EDITOR=vim
+export HISTFILESIZE=-1
+export HISTSIZE=-1
+export PATH=~/.npm-global/bin:$PATH
+export PATH=~/bin:$PATH
+
+alias diff='diff --color'
+alias grep='grep --color'
+
+alias l='ll -a'
+alias ll='ls -lhFp --color --group-directories-first'
+
+alias cp='cp -n'
+alias mv='mv -n'
+
+alias curl='curl -s'
+
+alias sbt-new='sbt new scala/scala3.g8'
+
+alias aprs='rtl_fm -f 144.39M -o 4 - | direwolf -n 1 -r 24000 -b 16 -'
