@@ -99,6 +99,7 @@ in {
         pkgs.direwolf
         pkgs.dmenu
         pkgs.electrum
+        pkgs.ffmpeg
         pkgs.file
         pkgs.firefox
         pkgs.flameshot
@@ -119,6 +120,7 @@ in {
         pkgs.links2
         pkgs.lm_sensors
         pkgs.mosh
+        pkgs.mplayer
         pkgs.musescore
         pkgs.nix-prefetch-git
         pkgs.nmap
