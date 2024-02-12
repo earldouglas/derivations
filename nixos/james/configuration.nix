@@ -168,14 +168,17 @@ in {
         xmobar-wifi
       ];
     };
+
     programs.bash = {
       enable = true;
       bashrcExtra = builtins.readFile ./bash_aliases;
     };
+
     programs.xmobar = {
       enable = true;
       extraConfig = builtins.readFile ./xmobarrc;
     };
+
     programs.git = {
       enable = true;
       userName  = "James Earl Douglas";
@@ -188,28 +191,53 @@ in {
         "project/project/"
       ];
     };
+
     programs.ssh = {
       enable = true;
       addKeysToAgent = "yes";
     };
+
     programs.vim = {
       enable = true;
       defaultEditor = true;
       packageConfigurable = pkgs.vimHugeX;
       extraConfig = builtins.readFile ./vimrc;
     };
+
     programs.gpg.enable = true;
+
     xresources.extraConfig = builtins.readFile ./xresources;
+
     xsession = {
       enable = true;
-      profileExtra = builtins.readFile ./xprofile;
+      profileExtra = ''
+        # disable bell
+        ${pkgs.xorg.xset}/bin/xset b off
+
+        # screen locker
+        ${pkgs.xss-lock}/bin/xss-lock -- ${pkgs.i3lock}/bin/i3lock --color=112244 &
+
+        # screen timeout
+        # ${pkgs.xorg.xset}/bin/xset dpms 900 900 900
+
+        # desktop background
+        ${pkgs.xorg.xsetroot}/bin/xsetroot -solid black
+
+        # disable touchpad
+        ${pkgs.xorg.xinput}/bin/xinput list | \
+          grep -Eoi 'touchpad\s*id=[0-9]{1,2}' | \
+          grep -Eo '[0-9]{1,2}' | \
+          xargs ${pkgs.xorg.xinput}/bin/xinput disable
+      '';
       windowManager.xmonad = {
         enable = true;
         enableContribAndExtras = true;
         config = ./xmonad.hs;
       };
     };
+
     services.ssh-agent.enable = true;
+
     services.gpg-agent = {
       enable = true;
       extraConfig = ''
