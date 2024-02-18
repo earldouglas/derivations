@@ -46,7 +46,7 @@ let
 in {
 
   imports = [
-    <home-manager/nixos> # https://github.com/nix-community/home-manager/archive/master.tar.gz
+    <home-manager/nixos> # nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
   ];
 
   # Samba ##############################################################
