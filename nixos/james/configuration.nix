@@ -90,6 +90,7 @@ in {
       stateVersion = stateVersion;
       packages = [
 
+        pkgs.alsa-utils
         pkgs.arandr
         pkgs.bind # nslookup
         pkgs.binutils
