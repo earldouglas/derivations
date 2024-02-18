@@ -30,6 +30,7 @@ let
               vim-nix
               vim-scala
               nerdtree
+              vim-vsnip
             ];
           };
       };
@@ -48,5 +49,6 @@ in
         pkgs.coursier
         pkgs.metals
         pkgs.jdk
+        pkgs.xclip # for clipboard access
       ]}
   ''

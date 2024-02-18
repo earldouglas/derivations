@@ -42,5 +42,6 @@ in
     makeWrapper ${vim}/bin/vim $out/bin/vim-unison \
       --set PATH ${pkgs.lib.makeBinPath [
         unison-nix.unison-ucm
+        pkgs.xclip # for clipboard access
       ]}
   ''

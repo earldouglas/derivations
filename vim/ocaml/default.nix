@@ -74,5 +74,6 @@ in
         pkgs.ocamlformat
         pkgs.nodejs
         pkgs.ocamlPackages.dune_3
+        pkgs.xclip # for clipboard access
       ]}
   ''

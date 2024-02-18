@@ -40,5 +40,8 @@ in
   ''
     mkdir -p $out/bin
     makeWrapper ${nvim_with_plugins}/bin/nvim $out/bin/nvim-java \
-      --set JAVA_HOME ${pkgs.jdk}/lib/openjdk
+      --set JAVA_HOME ${pkgs.jdk}/lib/openjdk \
+      --set PATH ${pkgs.lib.makeBinPath [
+        pkgs.xclip # for clipboard access
+      ]}
   ''

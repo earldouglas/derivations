@@ -47,5 +47,8 @@ in
   }
   ''
     mkdir -p $out/bin
-    makeWrapper ${nvim_with_plugins}/bin/nvim $out/bin/nvim-haskell
+    makeWrapper ${nvim_with_plugins}/bin/nvim $out/bin/nvim-haskell \
+      --set PATH ${pkgs.lib.makeBinPath [
+        pkgs.xclip # for clipboard access
+      ]}
   ''
