@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 shopt -s nullglob globstar
 
 prefix=${PASSWORD_STORE_DIR-~/.password-store}

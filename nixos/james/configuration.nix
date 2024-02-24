@@ -23,8 +23,11 @@ let
   twofamenu =
     pkgs.writeShellApplication {
       name = "2famenu";
-      runtimeInputs = [];
-      text = builtins.readFile ./scripts/2famenu.sh;
+      runtimeInputs = [
+        pkgs.pass
+        pkgs.oathToolkit
+      ];
+      text = builtins.readFile ./scripts/2famenu;
     };
 
   xmobar-vol =
