@@ -201,6 +201,7 @@ in {
     programs.ssh = {
       enable = true;
       addKeysToAgent = "yes";
+      matchBlocks.servo.forwardAgent = true;
     };
 
     programs.vim = {
