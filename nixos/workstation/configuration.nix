@@ -10,6 +10,9 @@
   boot.kernelModules = [
     "i2c-dev" # enables ddcutil for monitor brightness
   ];
+  boot.kernelParams = [
+    "usbcore.autosuspend=-1" # fix peripherals auto-sleeping after boot
+  ];
 
   # GC #################################################################
   nix.gc = {
