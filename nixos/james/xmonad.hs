@@ -12,7 +12,9 @@ import XMonad (KeyMask)
 import XMonad (KeySym)
 import XMonad (layoutHook)
 import XMonad (Mirror)
+import XMonad (modMask)
 import XMonad (mod1Mask)
+import XMonad (mod4Mask)
 import XMonad (shiftMask)
 import XMonad (spawn)
 import XMonad (startupHook)
@@ -66,7 +68,8 @@ myAdditionalKeysP =
 
 myConfig :: XConfig (ModifiedLayout SmartBorder (Choose Tall (Choose (Mirror Tall) Full)))
 myConfig = def {
-    terminal = "xterm"
+    terminal = "alacritty"
+  , modMask = mod1Mask
   , startupHook = setWMName "LG3D" -- for Java GUIs
   , layoutHook = smartBorders $ layoutHook def
   }
