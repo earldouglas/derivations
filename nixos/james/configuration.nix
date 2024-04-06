@@ -180,6 +180,10 @@ in {
       bashrcExtra = builtins.readFile ./bash_aliases;
     };
 
+    programs.readline.extraConfig = ''
+      set mark-symliked-directories on
+    '';
+
     programs.alacritty = {
       enable = true;
       settings = {
