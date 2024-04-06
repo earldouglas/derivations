@@ -180,6 +180,41 @@ in {
       bashrcExtra = builtins.readFile ./bash_aliases;
     };
 
+    programs.alacritty = {
+      enable = true;
+      settings = {
+        font = {
+          size = 7;
+        };
+        colors = {
+          primary = {
+            foreground = "#ffffff";
+            background = "#000000";
+          };
+          normal = {
+            black = "#666666";
+            red = "#ff6666";
+            green = "#66ff66";
+            yellow = "#ffff66";
+            blue = "#9999ff";
+            magenta = "#ff66ff";
+            cyan = "#66ffff";
+            white = "#cccccc";
+          };
+          bright = {
+            black = "#999999";
+            red = "#ff9999";
+            green = "#99ff99";
+            yellow = "#ffff99";
+            blue = "#aaaaff";
+            magenta = "#ff99ff";
+            cyan = "#99ffff";
+            white = "#ffffff";
+          };
+        };
+      };
+    };
+
     programs.xmobar = {
       enable = true;
       extraConfig = builtins.readFile ./xmobarrc;
