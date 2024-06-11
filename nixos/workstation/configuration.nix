@@ -4,7 +4,6 @@
   i18n.supportedLocales = [ "all" ];
   powerManagement.powertop.enable = true;
   programs.light.enable = true;
-  programs.steam.enable = true;
   time.timeZone = timeZone;
   boot.supportedFilesystems = [ "ntfs" ];
   boot.kernelModules = [
