@@ -5,3 +5,4 @@ nnoremap <C-f> :NERDTreeFind<CR>
 let NERDTreeShowHidden=1
 nnoremap <C-.> :vertical resize +10<CR>
 nnoremap <C-,> :vertical resize -10<CR>
+let g:NERDTreeWinSize=60
