@@ -109,10 +109,8 @@ in {
         pkgs.flameshot
         pkgs.geeqie
         pkgs.gimp
-        pkgs.git
         pkgs.gnupg
         pkgs.haskellPackages.ghc
-        pkgs.heroic
         pkgs.htop
         pkgs.imagemagick
         pkgs.inetutils # telnet
@@ -123,6 +121,7 @@ in {
         pkgs.libreoffice
         pkgs.links2
         pkgs.lm_sensors
+        pkgs.mermaid-cli
         pkgs.mosh
         pkgs.mplayer
         pkgs.musescore
@@ -135,9 +134,7 @@ in {
         pkgs.powertop
         pkgs.rename
         pkgs.rtl-sdr
-        pkgs.sbt
         pkgs.scala
-        pkgs.scala-cli
         pkgs.scrcpy
         pkgs.screen
         pkgs.scrot
