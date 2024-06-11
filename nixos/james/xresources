@@ -6,6 +6,7 @@ XTerm*faceSize: 12
 XTerm*reverseVideo: on
 
 !! Make dark blue easier on the eyes
+XTerm*color4: CornflowerBlue
 XTerm*color12: CornflowerBlue
 
 !! Triple-click to highlight URL
