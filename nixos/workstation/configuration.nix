@@ -104,7 +104,6 @@
   # Fonts ##############################################################
   fonts = {
     packages = [
-      pkgs.corefonts # non-free
       pkgs.dejavu_fonts
       pkgs.ubuntu_font_family
     ];
