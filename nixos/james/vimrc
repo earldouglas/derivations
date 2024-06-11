@@ -50,6 +50,3 @@ autocmd FileType markdown setlocal formatlistpat=^\\s*\\d\\+[.\)]\\s\\+\\\|^\\s*
 
 " autocmd BufWritePre *.scala lua vim.lsp.buf.format()
 " autocmd BufWritePre *.sbt lua vim.lsp.buf.format()
-
-" disable bracketed paste
-set t_BE=
