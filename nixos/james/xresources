@@ -19,3 +19,12 @@ XTerm*titeInhibit: true
 
 !! Shift-click to open highlighted URL
 XTerm*translations: #override Shift <Btn1Up>: exec-formatted("/run/current-system/sw/bin/xdg-open '%t'", PRIMARY)
+
+!! Disable HiDPI
+Xft.dpi: 96
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintmedium
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
