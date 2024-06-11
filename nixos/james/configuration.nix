@@ -226,12 +226,16 @@ in {
       userName  = "James Earl Douglas";
       userEmail = "james@earldouglas.com";
       ignores = [
+        ".bsp/"
         ".bloop/"
         ".metals/"
         "project/.bloop/"
         "project/metals.sbt"
         "project/project/"
+        "target/"
+        "result"
       ];
+      difftastic.enable = true;
     };
 
     programs.ssh = {
