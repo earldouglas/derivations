@@ -87,10 +87,10 @@
     xkb.layout = "us";
     windowManager.xmonad.enable = true;
     windowManager.xmonad.enableContribAndExtras = true;
-    displayManager.defaultSession = "none+xmonad";
     desktopManager.xterm.enable = false;
     synaptics.enable = false;
   };
+  services.displayManager.defaultSession = "none+xmonad";
 
   # Printing #########################################################
   services.printing = {
