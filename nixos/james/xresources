@@ -9,8 +9,10 @@ XTerm*reverseVideo: on
 XTerm*color4: CornflowerBlue
 XTerm*color12: CornflowerBlue
 
-!! Triple-click to highlight URL
-XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
+!! Multi-click to highlight different things
+XTerm*on2Clicks: word
+XTerm*on3Clicks: regex [^ \n<>]+
+XTerm*on4Clicks: line
 
 !! Disable the alternate screen
 XTerm*titeInhibit: true
