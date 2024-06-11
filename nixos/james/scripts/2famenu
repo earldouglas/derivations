@@ -11,7 +11,7 @@ password=$(printf '%s\n' "${password_files[@]}" | dmenu "$@")
 
 if [[ "$password" == */2fa ]]
 then
-  pass show "$password" 2>/dev/null | xargs oathtool --totp -b | xargs | xclip -i -sel clipboard
+  pass show "$password" 2>/dev/null | xargs oathtool --totp -b | xargs | tr -d '\n' | xclip -i -sel clipboard
 else
   pass show -c "$password" 2>/dev/null
 fi
