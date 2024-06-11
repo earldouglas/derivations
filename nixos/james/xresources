@@ -12,5 +12,8 @@ XTerm*color12: CornflowerBlue
 !! Triple-click to highlight URL
 XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
 
+!! Disable the alternate screen
+XTerm*titeInhibit: true
+
 !! Shift-click to open highlighted URL
 XTerm*translations: #override Shift <Btn1Up>: exec-formatted("/run/current-system/sw/bin/xdg-open '%t'", PRIMARY)
