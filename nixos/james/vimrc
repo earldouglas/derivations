@@ -50,3 +50,7 @@ autocmd FileType markdown setlocal formatlistpat=^\\s*\\d\\+[.\)]\\s\\+\\\|^\\s*
 
 " autocmd BufWritePre *.scala lua vim.lsp.buf.format()
 " autocmd BufWritePre *.sbt lua vim.lsp.buf.format()
+
+if has('nvim')
+  colorscheme vim
+endif
