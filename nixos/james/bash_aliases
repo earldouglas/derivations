@@ -18,3 +18,5 @@ alias curl='curl -s'
 alias sbt-new='sbt new scala/scala3.g8'
 
 alias aprs='rtl_fm -f 144.39M -o 4 - | direwolf -n 1 -r 24000 -b 16 -'
+
+alias nvim='nvim-scala'
