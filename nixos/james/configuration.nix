@@ -5,8 +5,8 @@ let
     pkgs.fetchFromGitHub {
       owner = "earldouglas";
       repo = "derivations";
-      rev = "816ff78c3da0f90b07eafd174a386c8f885cf14a";
-      sha256 = "13sy7axxj6517iqkidq3s132adk4s217mm7i7ni92fh7p89scd2a";
+      rev = "c2fc9a759a1068422c2be680cbe308c913272a25";
+      sha256 = "10ndji6fmp7kinqrkpwlh1k0l77m6wvnm0rs2hg215yi6c1y7q85";
     };
 
   nvim-haskell = import (derivations + "/nvim/haskell/default.nix") {};
