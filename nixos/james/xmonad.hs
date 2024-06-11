@@ -69,7 +69,6 @@ myAdditionalKeysP =
 myConfig :: XConfig (ModifiedLayout SmartBorder (Choose Tall (Choose (Mirror Tall) Full)))
 myConfig = def {
     terminal = "alacritty"
-  , modMask = mod1Mask
   , startupHook = setWMName "LG3D" -- for Java GUIs
   , layoutHook = smartBorders $ layoutHook def
   }
