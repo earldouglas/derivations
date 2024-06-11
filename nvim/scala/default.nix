@@ -17,7 +17,17 @@ let
   nvim_with_plugins =
     pkgs.neovim.override {
       configure = {
-        customRC = nvim-metals_vim + nerdtree_vim + vimrc;
+        customRC =
+          builtins.concatStringsSep "\n" [
+            nvim-metals_vim
+            nerdtree_vim
+            ''
+            let g:NERDTreeCopyCmd='${pkgs.coreutils}/bin/cp -r'
+            let g:NERDTreeRemoveDirCmd='${pkgs.coreutils}/bin/rm -rf'
+            ''
+            vimrc
+          ];
+
         packages.myVimPackage =
           with pkgs.vimPlugins; {
             start = [
