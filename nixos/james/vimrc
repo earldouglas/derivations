@@ -37,8 +37,8 @@ map <leader>v :r !xclip -o -sel clipboard -t text/html \| pandoc -f html -t mark
 
 let g:markdown_fenced_languages = ['scala', 'html', 'python', 'bash=sh']
 
-set ignorecase " case-insensitive searching
-set smartcase " case-insensitive iff query is lowercase
+"set ignorecase " case-insensitive searching
+"set smartcase " case-insensitive iff query is lowercase
 
 " Fix list wrapping
 " https://github.com/preservim/vim-markdown/issues/390#issuecomment-450392655
