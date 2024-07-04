@@ -1,6 +1,6 @@
 !! Font
 XTerm*faceName: Ubuntu Mono
-XTerm*faceSize: 12
+XTerm*faceSize: 13
 
 !! Dark mode
 XTerm*reverseVideo: on
