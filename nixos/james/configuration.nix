@@ -5,8 +5,8 @@ let
     pkgs.fetchFromGitHub {
       owner = "earldouglas";
       repo = "derivations";
-      rev = "aaf1f7fc9438b4e5186fb9df51e71e4bfb63714b";
-      sha256 = "196hjlc8xr3avmis8rg687pfwp1ixwnjz6l0v5kp8lhz58x4hc1k";
+      rev = "ecdf673b9745f0b534f31438a649d1e86372aff2";
+      sha256 = "0lm34d5d8hlpgnnyk9il2g54argv1y6gva2gq9511i4bgx8kc9gz";
     };
 
   nvim-james = import (derivations + "/nvim/james/default.nix") {};
