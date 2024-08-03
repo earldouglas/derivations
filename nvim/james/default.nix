@@ -2,9 +2,6 @@
 
 let
 
-  coc_nvim_vim =
-    builtins.readFile(./coc.nvim.vim);
-
   nvim-metals_vim =
     builtins.readFile(./nvim-metals.vim);
 
@@ -22,7 +19,6 @@ let
       configure = {
         customRC =
           builtins.concatStringsSep "\n" [
-            coc_nvim_vim
             nvim-metals_vim
             nerdtree_vim
             ''
@@ -35,12 +31,8 @@ let
         packages.myVimPackage =
           with pkgs.vimPlugins; {
             start = [
-
-              ## misc ##################################################
               vim-airline
               nerdtree
-
-              ## scala #################################################
               plenary-nvim     # required by nvim-metals
               nvim-dap         # required by nvim-metals?
               nvim-cmp
@@ -49,11 +41,6 @@ let
               vim-nix
               vim-scala
               vim-vsnip
-
-              ## java ##################################################
-              coc-nvim
-              coc-java
-
             ];
           };
       };
@@ -67,7 +54,6 @@ in
   ''
     mkdir -p $out/bin
     makeWrapper ${nvim_with_plugins}/bin/nvim $out/bin/vim \
-      --set JAVA_HOME ${pkgs.jdk}/lib/openjdk \
       --set PATH ${pkgs.lib.makeBinPath [
         pkgs.bash # without this, nvim crashes with "Client 1 quit with exit code 127 and signal 0"
         pkgs.coursier
