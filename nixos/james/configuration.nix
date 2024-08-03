@@ -5,15 +5,11 @@ let
     pkgs.fetchFromGitHub {
       owner = "earldouglas";
       repo = "derivations";
-      rev = "c2fc9a759a1068422c2be680cbe308c913272a25";
-      sha256 = "10ndji6fmp7kinqrkpwlh1k0l77m6wvnm0rs2hg215yi6c1y7q85";
+      rev = "aaf1f7fc9438b4e5186fb9df51e71e4bfb63714b";
+      sha256 = "196hjlc8xr3avmis8rg687pfwp1ixwnjz6l0v5kp8lhz58x4hc1k";
     };
 
-  nvim-haskell = import (derivations + "/nvim/haskell/default.nix") {};
-  nvim-java = import (derivations + "/nvim/java/default.nix") {};
-  nvim-scala = import (derivations + "/nvim/scala/default.nix") {};
-  vim-ocaml = import (derivations + "/vim/ocaml/default.nix") {};
-  vim-unison = import (derivations + "/vim/unison/default.nix") {};
+  nvim-james = import (derivations + "/nvim/james/default.nix") {};
 
   unison-nix = import (derivations + "/vim/unison/unison.nix") {};
 
@@ -158,11 +154,7 @@ in {
 
         unison-nix.unison-ucm
 
-        nvim-haskell
-        nvim-java
-        nvim-scala
-        vim-ocaml
-        vim-unison
+        nvim-james
 
         fswatch
         record
@@ -242,13 +234,6 @@ in {
       enable = true;
       addKeysToAgent = "yes";
       matchBlocks.servo.forwardAgent = true;
-    };
-
-    programs.vim = {
-      enable = true;
-      defaultEditor = true;
-      packageConfigurable = pkgs.vimHugeX;
-      extraConfig = builtins.readFile ./vimrc;
     };
 
     programs.gpg.enable = true;
