@@ -8,11 +8,8 @@ let
   nerdtree_vim =
     builtins.readFile(./nerdtree.vim);
 
-  vimrc = ''
-    if filereadable(expand('~/.vimrc'))
-      exe 'source' '~/.vimrc'
-    endif
-  '';
+  vimrc =
+    builtins.readFile(./vimrc);
 
   nvim_with_plugins =
     pkgs.neovim.override {
