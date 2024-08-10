@@ -21,7 +21,6 @@
   nix.optimise.automatic = true;
 
   # Audio ############################################################
-  sound.enable = false; # disable ALSA-based configuration
   security.rtkit.enable = true; # for PulseAudio to acquire realtime priority
   services.pipewire = {
     enable = true;
