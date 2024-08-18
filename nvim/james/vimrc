@@ -25,10 +25,6 @@ set background=dark
 set spell
 highlight SpellBad ctermbg=black cterm=underline
 
-" Map ctrl+c to convert Markdown to HTML and copy it into the clipboard
-map <leader>c :w !pandoc -f markdown -t html \| xclip -i -sel clipboard -t text/html<CR><CR>
-map <leader>v :r !xclip -o -sel clipboard -t text/html \| pandoc -f html -t markdown_strict<CR><CR>
-
 " Format the selected code with scalafmt
 " map <leader>f !scalafmt --stdin --config ~/docs/dotfiles/scalafmt.conf<CR><CR>
 

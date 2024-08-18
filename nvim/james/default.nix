@@ -23,6 +23,11 @@ let
             let g:NERDTreeRemoveDirCmd='${pkgs.coreutils}/bin/rm -rf'
             ''
             vimrc
+            ''
+            " Map \+c to convert Markdown to HTML and copy it into the clipboard
+            map <leader>c :w !${pkgs.pandoc}/bin/pandoc -f markdown -t html \| ${pkgs.xclip}/bin/xclip -i -sel clipboard -t text/html<CR><CR>
+            map <leader>v :r !${pkgs.xclip}/bin/xclip -o -sel clipboard -t text/html \| ${pkgs.pandoc}/bin/pandoc -f html -t markdown_strict<CR><CR>
+            ''
           ];
 
         packages.myVimPackage =
