@@ -150,7 +150,7 @@ in {
         pkgs.xournal # edit (sign, fill out, etc.) PDFs
         pkgs.zip
 
-        unison-nix.unison-ucm
+        # unison-nix.unison-ucm
 
         nvim-james
 
