@@ -129,7 +129,6 @@ in {
         pkgs.rtl-sdr
         pkgs.scala
         pkgs.scrcpy
-        pkgs.screen
         pkgs.scrot
         pkgs.simplescreenrecorder
         pkgs.stellarium
@@ -277,4 +276,22 @@ in {
       '';
     };
   };
+
+  programs.screen = {
+    enable = true;
+    package = pkgs.screen.overrideAttrs (old: {
+      src = pkgs.fetchurl {
+        url = "mirror://gnu/screen/screen-5.0.0.tar.gz";
+        hash = "sha256-8Eo50AoOXHyGpVM4gIkDCCrV301z3xov00JZdq7ZSXE=";
+      };
+      doCheck = false;
+    });
+    screenrc = ''
+      truecolor on
+      startup_message off
+      hardstatus alwayslastline
+      hardstatus string "%{b 7}%H %{7}| %{b 3}%D %d %M %Y %{7}| %{b 2}%02c %{7}| %-w%{b 6}%50>%n %t%{-}%+w%<"
+    '';
+  };
+
 }
