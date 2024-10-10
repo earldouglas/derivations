@@ -21,10 +21,6 @@ let
           builtins.concatStringsSep "\n" [
             nvim-metals_vim
             nerdtree_vim
-            ''
-            let g:NERDTreeCopyCmd='${pkgs.coreutils}/bin/cp -r'
-            let g:NERDTreeRemoveDirCmd='${pkgs.coreutils}/bin/rm -rf'
-            ''
             vimrc
           ];
 
@@ -60,5 +56,6 @@ in
         pkgs.metals
         pkgs.jdk
         pkgs.xclip # for clipboard access
+        pkgs.coreutils # for nerdtree to use cp, rm, stat, etc.
       ]}
   ''

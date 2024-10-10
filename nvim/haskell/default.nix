@@ -50,5 +50,6 @@ in
     makeWrapper ${nvim_with_plugins}/bin/nvim $out/bin/nvim-haskell \
       --set PATH ${pkgs.lib.makeBinPath [
         pkgs.xclip # for clipboard access
+        pkgs.coreutils # for nerdtree to use cp, rm, stat, etc.
       ]}
   ''

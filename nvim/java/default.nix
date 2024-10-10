@@ -43,5 +43,6 @@ in
       --set JAVA_HOME ${pkgs.jdk}/lib/openjdk \
       --set PATH ${pkgs.lib.makeBinPath [
         pkgs.xclip # for clipboard access
+        pkgs.coreutils # for nerdtree to use cp, rm, stat, etc.
       ]}
   ''
