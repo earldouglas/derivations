@@ -11,7 +11,7 @@ set backspace=indent,eol,start
 set textwidth=72
 set colorcolumn=73
 
-set termguicolors
+"set termguicolors
 
 set mouse=
 
