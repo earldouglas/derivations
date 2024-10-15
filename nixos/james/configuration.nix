@@ -126,7 +126,6 @@ in {
         pkgs.powertop
         pkgs.rename
         pkgs.rtl-sdr
-        pkgs.scala
         pkgs.scrcpy
         pkgs.scrot
         pkgs.simplescreenrecorder
