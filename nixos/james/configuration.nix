@@ -106,7 +106,6 @@ in {
         pkgs.imagemagick
         pkgs.inetutils # telnet
         pkgs.inotify-tools
-        pkgs.jdk
         pkgs.jq
         pkgs.killall
         pkgs.libreoffice
