@@ -223,6 +223,10 @@ in {
         "result"
       ];
       difftastic.enable = true;
+      extraConfig = {
+        init.defaultBranch = "main";
+        push.autoSetupRemote = true;
+      };
     };
 
     programs.ssh = {
