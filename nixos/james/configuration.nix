@@ -83,6 +83,7 @@ in {
       stateVersion = stateVersion;
       packages = [
 
+        pkgs.tigervnc
         pkgs.alsa-utils
         pkgs.arandr
         pkgs.bat
@@ -94,6 +95,7 @@ in {
         pkgs.direwolf
         pkgs.dmenu
         pkgs.electrum
+        pkgs.exiftool
         pkgs.ffmpeg
         pkgs.file
         pkgs.firefox
@@ -121,11 +123,11 @@ in {
         pkgs.oathToolkit
         pkgs.pass
         pkgs.pavucontrol
-        pkgs.exiftool
         pkgs.pitivi
         pkgs.powertop
         pkgs.rename
         pkgs.rtl-sdr
+        pkgs.rxvt-unicode-emoji
         pkgs.scrcpy
         pkgs.scrot
         pkgs.simplescreenrecorder
@@ -144,7 +146,7 @@ in {
         pkgs.xorg.xhost
         pkgs.xorg.xinit
         pkgs.xorg.xkill
-        pkgs.xournal # edit (sign, fill out, etc.) PDFs
+        pkgs.xournalpp # edit (sign, fill out, etc.) PDFs
         pkgs.zip
 
         # unison-nix.unison-ucm
@@ -267,6 +269,14 @@ in {
       };
     };
 
+    gtk = {
+      enable = true;
+      theme = {
+        name = "Adwaita-dark";
+        package = pkgs.gnome-themes-extra;
+      };
+    };
+
     services.ssh-agent.enable = true;
 
     services.gpg-agent = {
@@ -278,6 +288,8 @@ in {
       '';
     };
   };
+
+  programs.dconf.enable = true; # needed for gtk config
 
   programs.screen = {
     enable = true;
