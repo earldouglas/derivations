@@ -1,36 +1,13 @@
-XTerm.termName: xterm-256color
+URxvt.scrollBar: false
 
-XTerm.vt100.translations: #override \n\
-  Ctrl <Key> minus: smaller-vt-font() \n\
-  Ctrl <Key> plus: larger-vt-font()
+URxvt.reverseVideo: on
+URxvt.color12: CornflowerBlue
 
-!! Font
-XTerm*faceName: Ubuntu Mono
-XTerm*faceSize: 13
+URxvt.font: xft:Ubuntu Mono-13
 
-!! Dark mode
-XTerm*reverseVideo: on
+URxvt*perl-ext-common: font-size
+URxvt*keysym.C-equal: font-size:increase
+URxvt*keysym.C-minus: font-size:decrease
+URxvt*keysym.C-0: font-size:reset
 
-!! Make dark blue easier on the eyes
-XTerm*color4: CornflowerBlue
-XTerm*color12: CornflowerBlue
-
-!! Multi-click to highlight different things
-XTerm*on2Clicks: word
-XTerm*on3Clicks: regex [^ \n<>]+
-XTerm*on4Clicks: line
-
-!! Disable the alternate screen
-XTerm*titeInhibit: true
-
-!! Shift-click to open highlighted URL
-XTerm*translations: #override Shift <Btn1Up>: exec-formatted("/run/current-system/sw/bin/xdg-open '%t'", PRIMARY)
-
-!! Disable HiDPI
-Xft.dpi: 96
-Xft.autohint: 0
-Xft.lcdfilter: lcddefault
-Xft.hintstyle: hintmedium
-Xft.hinting: 1
-Xft.antialias: 1
-Xft.rgba: rgb
+URxvt.saveLines: 65535
