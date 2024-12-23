@@ -68,7 +68,7 @@ myAdditionalKeysP =
 
 myConfig :: XConfig (ModifiedLayout SmartBorder (Choose Tall (Choose (Mirror Tall) Full)))
 myConfig = def {
-    terminal = "xterm"
+    terminal = "urxvt"
   , startupHook = setWMName "LG3D" -- for Java GUIs
   , layoutHook = smartBorders $ layoutHook def
   }
